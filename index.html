@@ -145,7 +145,7 @@
 
         <!--<div style="float:left; width:auto;">-->
         <label class="">Year &nbsp;</label>
-        <select class="" id="year" disabled="disabled">
+        <select class="" id="year">
             <option value=""></option>
             <option value="First">First</option>
             <option value="Second">Second</option>
@@ -159,7 +159,7 @@
 
         <!--<div style="float:left; width:auto;">-->
         <label id="Label1" class="">Level &nbsp;</label>
-        <select class="" id="level" disabled="disabled">
+        <select class="" id="level">
             <option value=""></option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -172,7 +172,7 @@
 
         <!--<div style="float:left; width:auto;">-->
         <label class="">Time Taken &nbsp;</label>
-        <select class="" id="time" disabled="disabled">
+        <select class="" id="time">
             <option value=""></option>
             <option value="0-1 Semester">0-1 Semester</option>
             <option value="1-2 Semester">1-2 Semester</option>
@@ -185,31 +185,31 @@
                   -->
         <!--<div style="float:left; width:auto;">-->
         <label class="">Branch &nbsp;</label>
-        <select class="" id="branch" disabled="disabled">
+        <select class="" id="branch">
             <option value=""></option>
-            <option value="Mix">Mix</option>
-            <option value="AER">AER</option>
-            <option value="AUT">AUT</option>
-            <option value="BME">BME</option>
-            <option value="CHE">CHE</option>
-            <option value="CIV">CIV</option>
-            <option value="CCE">CCE</option>
-            <option value="CSE">CSE</option>
-            <option value="EEE">EEE</option>
-            <option value="ECE">ECE</option>
-            <option value="IP">IP</option>
-            <option value="ICT">ICT</option>
-            <option value="ICE">ICE</option>
-            <option value="MME">MME</option>
-            <option value="MTR">MTR</option>
-            <option value="PME">PME</option>
-            <option value="MTE">MTE</option>
+            <option value="Aeronautical">AER</option>
+            <option value="Automobile">AUT</option>
+            <option value="Biomedical">BME</option>
+            <option value="Biotechnology">BIO</option>
+            <option value="Chemical">CHE</option>
+            <option value="Civil">CIV</option>
+            <option value="Computer and Communication">CCE</option>
+            <option value="Computer Science">CSE</option>
+            <option value="Electrical and Electronics">EEE</option>
+            <option value="Electronics and Communication">ECE</option>
+            <option value="Industrial Production">IP</option>
+            <option value="Information Control">ICT</option>
+            <option value="Instrumentation and Control">ICE</option>
+            <option value="Mechanical">MME</option>
+            <option value="Mechatronics">MTR</option>
+            <option value="Print and Media Technology">PME</option>
+            <option value="MTech">MTech</option>
             <option value="MCA">MCA</option>
         </select>
         <!--</div>                -->
         &nbsp;&nbsp;&nbsp;&nbsp;
 
-        <input type="button" id="search_button" disabled="disabled" class="btn btn-primary" value="Search" style="margin-left:10px; margin-right:10px;" OnClick=""/>
+        <input type="button" id="search_button" class="btn btn-primary" value="Search" style="margin-left:10px; margin-right:10px;" OnClick=""/>
         <input type="button" id="submit" class="btn btn-primary" value="Submit Project" style="margin-left:10px; margin-right:10px;" onclick="window.location='submissions.html';"/>
     </div>
     <!--<br/>-->
@@ -290,48 +290,70 @@
 </div>
 
 <script>
-
+    var globalData = [];
+    var globalFormattedData = [];
+    var divClone = $("#containers").clone();
     var $rows = $('.each-proj');
+    var projectList;
+
     $('#search_button').click(function() {
-        // var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-        var year_val=$('#year').val();
-        var level_val=$('#level').val();
-        var time_val=$('#time').val();
-        var branch_val=$('#branch').val();
+         /**
+         * @author: Aakarsh Singh
+         * Filtering results on the click of Search Button
+         * Using pre-fetched values stored in globalData and globalFormattedData
+         * globalData contains data fetched from Firebase
+         * globalFormattedData contains the final HTML Data which is displayed
+         * */
 
-        $rows.show().filter(function() {
-            var text = $(this).text();   //.replace(/\s+/g, ' ').toLowerCase();
-            console.log(text);
-            return !~text.indexOf(year_val);//(text.indexOf(year_val) && text.indexOf(level_val) && text.indexOf(time_val) && text.indexOf(branch_val) );
-        }).hide();
+         var searchValues = {
+            year: $('#year').val(),
+            level: $('#level').val(),
+            time: $('#time').val(),
+            branch: $('#branch').val()
+        };
 
-        // $rows.show().filter(function() {
-        //     var text = $(this).text();   //.replace(/\s+/g, ' ').toLowerCase();
-        //     return !~text.indexOf(level_val);
-        // }).hide();
-        //
-        // $rows.show().filter(function() {
-        //     var text = $(this).text();   //.replace(/\s+/g, ' ').toLowerCase();
-        //     return !~text.indexOf(time_val);
-        // }).hide();
-        //
-        // $rows.show().filter(function() {
-        //     var text = $(this).text();   //.replace(/\s+/g, ' ').toLowerCase();
-        //     return !~text.indexOf(branch_val);
-        // }).hide();
+        $("#containers").replaceWith(divClone.clone());
+        projectList = $('#containers');
+
+        for (var i=0; i<globalData.length; i++) {
+            //Temporary Fix for first two results on the portal
+            // TODO: Fix the values in Database
+            if(globalData[i].branch == "CSE"){
+                globalData[i].branch = "Computer Science";
+            }
+            var yearFlag, levelFlag, timeFlag, branchFlag;
+            yearFlag = levelFlag = timeFlag = branchFlag = false;
+            if (searchValues.year == "" || searchValues.year == globalData[i].year ) {
+                yearFlag = true;
+            }
+
+            if (searchValues.level == "" || searchValues.level == (globalData[i].level)) {
+                levelFlag = true;
+            }
+            if (searchValues.time == "" || searchValues.time == (globalData[i].time)) {
+                timeFlag = true;
+            }
+            if (searchValues.branch == "" || searchValues.branch == (globalData[i].branch)) {
+                branchFlag = true;
+            }
+            if(yearFlag && levelFlag && timeFlag && branchFlag) {
+                projectList.append(globalFormattedData[i]);
+            }
+        }
     });
 
 
     var myDataRef = new Firebase('https://engineering-projects.firebaseio.com//display-projects');
 
-    /** @uthor: Mehul Smriti Raje
+    /** @author: Mehul Smriti Raje
      * Function to fetch entries and form them in the table
      */
 
-    var projectList = $('#containers');
+    projectList = $('#containers');
 
     myDataRef.on('child_added', function(snapshot) {
         var data = snapshot.val();
+        globalData.push(data);
         displayProject(data);
     });
 
@@ -339,36 +361,37 @@
         /**
          * Logic to append all Comma-Separated Links as Clickable Links
          * link_t contains data ready to be appended to 'Important Links'
+         *
          * */
-        var link_t=$('<i class="proj-links"/>');
+
+        var link_t = $('<i class="proj-links"/>');
         var str_array = data.links.split(',');
-        for(var i = 0; i < str_array.length; i++) {
+        for (var i = 0; i < str_array.length; i++) {
             str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
-            link_t.append($('<a href="'+str_array[i]+'" target="_blank"/>').html(str_array[i]));
-            if(i< str_array.length - 1)
-            {
+            link_t.append($('<a href="' + str_array[i] + '" target="_blank"/>').html(str_array[i]));
+            if (i < str_array.length - 1) {
                 link_t.append($('<br/>'));
             }
         }
         var newProject = $('<div class="each-proj"/>');
         newProject.append($('<div class="proj-title"/>')
                 .append($('<img class="proj-img" src="Images/colourful.jpg"/>'))
-                .append($('<span/>').html('&nbsp;&nbsp;&nbsp;&nbsp;'+ data.name))
+                .append($('<span/>').html('&nbsp;&nbsp;&nbsp;&nbsp;' + data.name))
         );
 
         newProject.append($('<div class="proj-content"/>')
                 .append($('<div class="proj-desc"/>')
-                        .append($('<p/>').html(data.desc+'<br/>'))
-                        .append($('<p/>').html('Platform Used:&nbsp;'+ data.platform +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
-                                'Project Type:&nbsp;'+ data.ptype +'<br/>'+
-                                'Languages Used:&nbsp;'+data.languages+'<br/>'))
-                        .append($('<p/>').html('Level:&nbsp;'+ data.level +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
-                                'Year:&nbsp;'+ data.year +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
-                                'Team Size:&nbsp;'+ data.size +'&nbsp;Member(s)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
-                                'Time Taken:&nbsp;'+data.time+'<br/>'))
-                        .append($('<p/>').html('Branch:&nbsp;'+ data.branch +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
-                                'College:&nbsp;'+ data.college +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
-                                'Country:&nbsp;'+data.country+'<br/>'))
+                        .append($('<p/>').html(data.desc + '<br/>'))
+                        .append($('<p/>').html('Platform Used:&nbsp;' + data.platform + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+                                'Project Type:&nbsp;' + data.ptype + '<br/>' +
+                                'Languages Used:&nbsp;' + data.languages + '<br/>'))
+                        .append($('<p/>').html('Level:&nbsp;' + data.level + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+                                'Year:&nbsp;' + data.year + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+                                'Team Size:&nbsp;' + data.size + '&nbsp;Member(s)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+                                'Time Taken:&nbsp;' + data.time + '<br/>'))
+                        .append($('<p/>').html('Branch:&nbsp;' + data.branch + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+                                'College:&nbsp;' + data.college + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+                                'Country:&nbsp;' + data.country + '<br/>'))
                 )
         );
 
@@ -388,10 +411,9 @@
                 )
                 .append($('<br/>'))
         );
-
-
+        globalFormattedData.push(newProject);
         projectList.append(newProject);
-    };
+    }
 </script>
 
 
