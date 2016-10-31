@@ -1,19 +1,19 @@
-﻿<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta property="og:image" content="Images/preview.png" />
-    <meta name="description" content="A portal for getting ideas about projects for engineering students"/>
-    <title>
+﻿
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta property="og:image" content="Images/preview.png" />
+		<meta name="description" content="A portal for getting ideas about projects for engineering students"/>
+		<title>
         Search
     </title>
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <script src="Scripts/bootstrap.min.js"></script>
-    <script src="Scripts/jquery-1.9.1.min.js"></script>
-    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-
-    <style>
+		<link href="Content/bootstrap.min.css" rel="stylesheet" />
+		<script src="Scripts/bootstrap.min.js"></script>
+		<script src="Scripts/jquery-1.9.1.min.js"></script>
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+			<style>
         /*Not working yet*/
         .submit_class {
             color:#000000;
@@ -129,167 +129,151 @@
         }
 
     </style>
-
-</head>
-<body>
-
-<div id="header" style="padding-top:36px; padding-bottom:36px; width:80%; margin-left:auto; margin-right:auto; text-align:center;">
-    <div style="width:100%; font-weight:700; font-size:36px; ">
+		</head>
+		<body>
+			<div id="header" style="padding-top:36px; padding-bottom:36px; width:80%; margin-left:auto; margin-right:auto; text-align:center;">
+				<div style="width:100%; font-weight:700; font-size:36px; ">
         Engineering Projects
     </div>
-    Developed by <a href="http://github.com/mehulsr/EngineeringProjects">MSR</a>
-    <br/>
-    <br/>
-    <div id="filters" style="font-size:16px; width:auto; text-align:center;">
-        <label style="">Filters:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-
-        <!--<div style="float:left; width:auto;">-->
-        <label class="">Year &nbsp;</label>
-        <select class="" id="year" disabled="disabled">
-            <option value=""></option>
-            <option value="First">First</option>
-            <option value="Second">Second</option>
-            <option value="Third">Third</option>
-            <option value="Fourth">Fourth</option>
-            <option value="M.Tech I">M.Tech I</option>
-            <option value="M.Tech II">M.Tech II</option>
-        </select>
+    Developed by 
+				<a href="http://github.com/mehulsr/EngineeringProjects">MSR</a>
+				<br/>
+				<br/>
+				<div id="filters" style="font-size:16px; width:auto; text-align:center;">
+					<label style="">Filters:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<!--<div style="float:left; width:auto;">-->
+					<label class="">Year &nbsp;</label>
+					<select class="" id="year" disabled="disabled">
+						<option value=""></option>
+						<option value="First">First</option>
+						<option value="Second">Second</option>
+						<option value="Third">Third</option>
+						<option value="Fourth">Fourth</option>
+						<option value="M.Tech I">M.Tech I</option>
+						<option value="M.Tech II">M.Tech II</option>
+					</select>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <!--</div>-->
-
-        <!--<div style="float:left; width:auto;">-->
-        <label id="Label1" class="">Level &nbsp;</label>
-        <select class="" id="level" disabled="disabled">
-            <option value=""></option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
+        
+					<!--</div>-->
+					<!--<div style="float:left; width:auto;">-->
+					<label id="Label1" class="">Level &nbsp;</label>
+					<select class="" id="level" disabled="disabled">
+						<option value=""></option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <!--</div>-->
-
-        <!--<div style="float:left; width:auto;">-->
-        <label class="">Time Taken &nbsp;</label>
-        <select class="" id="time" disabled="disabled">
-            <option value=""></option>
-            <option value="0-1 Semester">0-1 Semester</option>
-            <option value="1-2 Semester">1-2 Semester</option>
-            <option value="1-2 Year">1-2 Year</option>
-            <option value="2-3 Years">2-3 Year</option>
-            <option value="> 3 Years">> 3 Year</option>
-        </select>
+        
+					<!--</div>-->
+					<!--<div style="float:left; width:auto;">-->
+					<label class="">Time Taken &nbsp;</label>
+					<select class="" id="time" disabled="disabled">
+						<option value=""></option>
+						<option value="0-1 Semester">0-1 Semester</option>
+						<option value="1-2 Semester">1-2 Semester</option>
+						<option value="1-2 Year">1-2 Year</option>
+						<option value="2-3 Years">2-3 Year</option>
+						<option value="> 3 Years">> 3 Year</option>
+					</select>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <!--</div>
+        
+					<!--</div>
                   -->
-        <!--<div style="float:left; width:auto;">-->
-        <label class="">Branch &nbsp;</label>
-        <select class="" id="branch" disabled="disabled">
-            <option value=""></option>
-            <option value="Mix">Mix</option>
-            <option value="AER">AER</option>
-            <option value="AUT">AUT</option>
-            <option value="BME">BME</option>
-            <option value="CHE">CHE</option>
-            <option value="CIV">CIV</option>
-            <option value="CCE">CCE</option>
-            <option value="CSE">CSE</option>
-            <option value="EEE">EEE</option>
-            <option value="ECE">ECE</option>
-            <option value="IP">IP</option>
-            <option value="ICT">ICT</option>
-            <option value="ICE">ICE</option>
-            <option value="MME">MME</option>
-            <option value="MTR">MTR</option>
-            <option value="PME">PME</option>
-            <option value="MTE">MTE</option>
-            <option value="MCA">MCA</option>
-        </select>
-        <!--</div>                -->
+					<!--<div style="float:left; width:auto;">-->
+					<label class="">Branch &nbsp;</label>
+					<select class="" id="branch" disabled="disabled">
+						<option value=""></option>
+						<option value="Mix">Mix</option>
+						<option value="AER">AER</option>
+						<option value="AUT">AUT</option>
+						<option value="BME">BME</option>
+						<option value="CHE">CHE</option>
+						<option value="CIV">CIV</option>
+						<option value="CCE">CCE</option>
+						<option value="CSE">CSE</option>
+						<option value="EEE">EEE</option>
+						<option value="ECE">ECE</option>
+						<option value="IP">IP</option>
+						<option value="ICT">ICT</option>
+						<option value="ICE">ICE</option>
+						<option value="MME">MME</option>
+						<option value="MTR">MTR</option>
+						<option value="PME">PME</option>
+						<option value="MTE">MTE</option>
+						<option value="MCA">MCA</option>
+					</select>
+					<!--</div>                -->
         &nbsp;&nbsp;&nbsp;&nbsp;
 
-        <input type="button" id="search_button" disabled="disabled" class="btn btn-primary" value="Search" style="margin-left:10px; margin-right:10px;" OnClick=""/>
-        <input type="button" id="submit" class="btn btn-primary" value="Submit Project" style="margin-left:10px; margin-right:10px;" onclick="window.location='submissions.html';"/>
-    </div>
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<div id="buttons" style="width:100%;">-->
-    <!--</div>-->
-</div>
-
-<div id="containers" style="width:80%; margin-left:auto; margin-right:auto; margin-top:0px; margin-bottom:72px; height:auto;">
-    <!--#1BBC9B #f39c12-->
-    <div class="result" style="padding:10px; margin:0px 20px; background-color:#1bbc98; font-size:larger; font-weight:700; color:#ffffff;">
+        
+					<input type="button" id="search_button" disabled="disabled" class="btn btn-primary" value="Search" style="margin-left:10px; margin-right:10px;" OnClick=""/>
+					<input type="button" id="submit" class="btn btn-primary" value="Submit Project" style="margin-left:10px; margin-right:10px;" onclick="window.location='submissions.html';"/>
+				</div>
+				<!--<br/>-->
+				<!--<br/>-->
+				<!--<div id="buttons" style="width:100%;">-->
+				<!--</div>-->
+			</div>
+			<div id="containers" style="width:80%; margin-left:auto; margin-right:auto; margin-top:0px; margin-bottom:72px; height:auto;">
+				<!--#1BBC9B #f39c12-->
+				<div class="result" style="padding:10px; margin:0px 20px; background-color:#1bbc98; font-size:larger; font-weight:700; color:#ffffff;">
         Results
     </div>
-
-    <!-- <div class="each-proj">
-        <div class="proj-title">
-            <img class="proj-img" src="Images/colourful.jpg"/>
+				<!-- <div class="each-proj"><div class="proj-title"><img class="proj-img" src="Images/colourful.jpg"/>
             &nbsp;&nbsp;&nbsp;&nbsp;
             Search Engine Optimisation
-        </div>
-
-        <div class="proj-content">
-            <div style="width:25%; padding:10px; float:left; text-align:center; vertical-align:center;">
-                <img src="Images/colourful.jpg" style="width:120px; height:90px;"/>
-            </div>
-            <div class="proj-desc">
-                <p>
+        </div><div class="proj-content"><div style="width:25%; padding:10px; float:left; text-align:center; vertical-align:center;"><img src="Images/colourful.jpg" style="width:120px; height:90px;"/></div><div class="proj-desc"><p>
                     This project aims to optimise the desktop search by indexing only those files that are useful only to the user.
                     This project aims to optimise the desktop search by indexing only those files that are useful only to the user.
-                    This project aims to optimise the desktop search by indexing only those files that are useful only to the user. <br/>
-                </p>
-                <p>
+                    This project aims to optimise the desktop search by indexing only those files that are useful only to the user. <br/></p><p>
                     Level: 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Year: 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Time Taken: 1 Semester <br/>
-                </p>
-            </div>
-        </div>
-
-        <div class="proj-footer" >
-            <i>Important Links:</i>
-            <i class="proj-links"><a href="http://github.com/mehulsr/SEO">http://github.com/mehulsr/SEO</a></i>
-            <br/>
-            <i>Tags:</i>
-            <i class="proj-links">#basic #seo</i>
-        </div>
-
-    </div> -->
-
-</div>
-
-
-<div id="footer" style="width: 100%; background-color:#ffffff; border-top: 1px solid rgba(0,0,0,0.1); bottom: 0">
-    <div style="width:100%; padding-top:20px; padding-left:20px; padding-right:20px; padding-bottom:10px; float:left;">
-        <div style="width:20%; float:left; text-align:center;">
-            <img class="circular" src="Images/profile-pic.jpg" />
-        </div>
-        <div style="width:80%; padding:10px; float:right;">
-            <p>
-                Hi, I am Mehul!<br/>
+                    Time Taken: 1 Semester <br/></p></div></div><div class="proj-footer" ><i>Important Links:</i><i class="proj-links"><a href="http://github.com/mehulsr/SEO">http://github.com/mehulsr/SEO</a></i><br/><i>Tags:</i><i class="proj-links">#basic #seo</i></div></div> -->
+			</div>
+			<div id="footer" style="width: 100%; background-color:#ffffff; border-top: 1px solid rgba(0,0,0,0.1); bottom: 0">
+				<div style="width:100%; padding-top:20px; padding-left:20px; padding-right:20px; padding-bottom:10px; float:left;">
+					<div style="width:20%; float:left; text-align:center;">
+						<img class="circular" src="Images/profile-pic.jpg" />
+					</div>
+					<div style="width:80%; padding:10px; float:right;">
+						<p>
+                Hi, I am Mehul!
+							<br/>
                 I am a software developer who thinks that all the code I write will crawl out and form a Matrix someday. I get excited by the prospect of any fantasy that feels like it can be coded to change the world.
                 I am currently experimenting with Neural Networks and Formal Languages.
-            </p>
-        </div>
-    </div>
-    <div style="width:100%;">
-        <p style="padding-top:10px; margin: 0 0 0px; text-align:center;">- Mehul Smriti Raje &copy; 2015 -</p>
-        <br />
-        <div style="margin-left:auto; margin-right:auto; text-align:center; padding-top:0px; padding-bottom:20px;">
-            <a href="https://github.com/mehulsr"><img id="I1" src="Images/github.png" width="30" height="30" class="fa fa-facebook-square fa-3x social-tw"/></a>
-            <a href="http://lnkd.in/bJybHkK"><img id="I2" src="Images/linkedin.png" width="30" height="30" class="fa fa-facebook-square fa-3x social-tw"/></a>
-            <a href="https://www.facebook.com/mehul.s.raje"><img id="I3" src="Images/facebook.png" width="30" height="30" class="fa fa-facebook-square fa-3x social-tw"/></a>
-            <a href="https://twitter.com/MSR163"><img id="I4" src="Images/twitter.png" width="30" height="30" class="fa fa-twitter-square fa-3x social-tw"/></a>
-            <a href="https://plus.google.com/+MehulSmritiRaje"><img id="I5" src="Images/googleplus.png" width="30" height="30" class="fa fa-google-plus-square fa-3x social-gp"/></a>
-            <a href="mailto:mehul.raje@gmail.com"><img id="I6" src="Images/email.png" width="30" height="30" class="fa fa-envelope-square fa-3x social-em"/></a>
-        </div>
-    </div>
-</div>
-
-<script>
+            
+						</p>
+					</div>
+				</div>
+				<div style="width:100%;">
+					<p style="padding-top:10px; margin: 0 0 0px; text-align:center;">- Mehul Smriti Raje &copy; 2015 -</p>
+					<br />
+					<div style="margin-left:auto; margin-right:auto; text-align:center; padding-top:0px; padding-bottom:20px;">
+						<a href="https://github.com/mehulsr">
+							<img id="I1" src="Images/github.png" width="30" height="30" class="fa fa-facebook-square fa-3x social-tw"/>
+						</a>
+						<a href="http://lnkd.in/bJybHkK">
+							<img id="I2" src="Images/linkedin.png" width="30" height="30" class="fa fa-facebook-square fa-3x social-tw"/>
+						</a>
+						<a href="https://www.facebook.com/mehul.s.raje">
+							<img id="I3" src="Images/facebook.png" width="30" height="30" class="fa fa-facebook-square fa-3x social-tw"/>
+						</a>
+						<a href="https://twitter.com/MSR163">
+							<img id="I4" src="Images/twitter.png" width="30" height="30" class="fa fa-twitter-square fa-3x social-tw"/>
+						</a>
+						<a href="https://plus.google.com/+MehulSmritiRaje">
+							<img id="I5" src="Images/googleplus.png" width="30" height="30" class="fa fa-google-plus-square fa-3x social-gp"/>
+						</a>
+						<a href="mailto:mehul.raje@gmail.com">
+							<img id="I6" src="Images/email.png" width="30" height="30" class="fa fa-envelope-square fa-3x social-em"/>
+						</a>
+					</div>
+				</div>
+			</div>
+			<script>
 
     var $rows = $('.each-proj');
     $('#search_button').click(function() {
@@ -340,60 +324,88 @@
          * Logic to append all Comma-Separated Links as Clickable Links
          * link_t contains data ready to be appended to 'Important Links'
          * */
-        var link_t=$('<i class="proj-links"/>');
+        var link_t=$('
+				<i class="proj-links"/>');
         var str_array = data.links.split(',');
         for(var i = 0; i < str_array.length; i++) {
             str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
-            link_t.append($('<a href="'+str_array[i]+'" target="_blank"/>').html(str_array[i]));
+            link_t.append($('
+				<a href="'+str_array[i]+'" target="_blank"/>').html(str_array[i]));
             if(i< str_array.length - 1)
             {
-                link_t.append($('<br/>'));
+                link_t.append($('
+				<br/>'));
             }
         }
-        var newProject = $('<div class="each-proj"/>');
-        newProject.append($('<div class="proj-title"/>')
-                .append($('<img class="proj-img" src="Images/colourful.jpg"/>'))
-                .append($('<span/>').html('&nbsp;&nbsp;&nbsp;&nbsp;'+ data.name))
+        var newProject = $('
+				<div class="each-proj"/>');
+        newProject.append($('
+				<div class="proj-title"/>')
+                .append($('
+				<img class="proj-img" src="Images/colourful.jpg"/>'))
+                .append($('
+				<span/>').html('&nbsp;&nbsp;&nbsp;&nbsp;'+ data.name))
         );
 
-        newProject.append($('<div class="proj-content"/>')
-                .append($('<div class="proj-desc"/>')
-                        .append($('<p/>').html(data.desc+'<br/>'))
-                        .append($('<p/>').html('Platform Used:&nbsp;'+ data.platform +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
-                                'Project Type:&nbsp;'+ data.ptype +'<br/>'+
-                                'Languages Used:&nbsp;'+data.languages+'<br/>'))
-                        .append($('<p/>').html('Level:&nbsp;'+ data.level +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
+        newProject.append($('
+				<div class="proj-content"/>')
+                .append($('
+				<div class="proj-desc"/>')
+                        .append($('
+				<p/>').html(data.desc+'
+				<br/>'))
+                        .append($('
+				<p/>').html('Platform Used:&nbsp;'+ data.platform +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
+                                'Project Type:&nbsp;'+ data.ptype +'
+				<br/>'+
+                                'Languages Used:&nbsp;'+data.languages+'
+				<br/>'))
+                        .append($('
+				<p/>').html('Level:&nbsp;'+ data.level +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
                                 'Year:&nbsp;'+ data.year +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
                                 'Team Size:&nbsp;'+ data.size +'&nbsp;Member(s)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
-                                'Time Taken:&nbsp;'+data.time+'<br/>'))
-                        .append($('<p/>').html('Branch:&nbsp;'+ data.branch +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
+                                'Time Taken:&nbsp;'+data.time+'
+				<br/>'))
+                        .append($('
+				<p/>').html('Branch:&nbsp;'+ data.branch +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
                                 'College:&nbsp;'+ data.college +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
-                                'Country:&nbsp;'+data.country+'<br/>'))
+                                'Country:&nbsp;'+data.country+'
+				<br/>'))
                 )
         );
 
-        newProject.append($('<div class="proj-footer" style="overflow:auto;" >')
-                .append($('<i/>').html('Contact for Queries:&nbsp;'))
-                .append($('<i class="proj-links"/>')
-                        .append($('<a/>').html(data.contact))
+        newProject.append($('
+				<div class="proj-footer" style="overflow:auto;" >')
+                .append($('
+					<i/>').html('Contact for Queries:&nbsp;'))
+                .append($('
+					<i class="proj-links"/>')
+                        .append($('
+					<a/>').html(data.contact))
                 )
-                .append($('<br/>'))
-                .append($('<div style="width:50%; float:left;"/>')
-                        .append($('<i/>').html('Important Links:&nbsp;'))
+                .append($('
+					<br/>'))
+                .append($('
+					<div style="width:50%; float:left;"/>')
+                        .append($('
+					<i/>').html('Important Links:&nbsp;'))
                         .append(link_t)
                 )
-                .append($('<div style="width:50%;float:right; text-align:right;"/>')
-                        .append($('<i/>').html('Tags:&nbsp;'))
-                        .append($('<i class="proj-links">').html(data.tags))
+                .append($('
+					<div style="width:50%;float:right; text-align:right;"/>')
+                        .append($('
+					<i/>').html('Tags:&nbsp;'))
+                        .append($('
+					<i class="proj-links">').html(data.tags))
                 )
-                .append($('<br/>'))
+                .append($('
+						<br/>'))
         );
 
 
         projectList.append(newProject);
     };
-</script>
 
-
-</body>
-</html>
+					</script>
+				</body>
+			</html>
